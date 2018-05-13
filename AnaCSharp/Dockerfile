@@ -5,6 +5,8 @@ EXPOSE 80
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY AnaCSharp/AnaCSharp.csproj AnaCSharp/
+COPY AnaCSharp.BLL/AnaCSharp.BLL.csproj AnaCSharp.BLL/
+COPY AnaCSharp.DAL/AnaCSharp.DAL.csproj AnaCSharp.DAL/
 RUN dotnet restore AnaCSharp/AnaCSharp.csproj
 COPY . .
 WORKDIR /src/AnaCSharp
