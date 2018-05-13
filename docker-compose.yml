@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  anacsharp:
+    image: ${DOCKER_REGISTRY}anacsharp
+    build:
+      context: .
+      dockerfile: AnaCSharp/Dockerfile
