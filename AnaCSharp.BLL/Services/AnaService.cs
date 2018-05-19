@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AnaCSharp.DAL;
-using AnaCSharp.DAL.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using AnaCSharp.DAL;
 
 namespace AnaCSharp.BLL.Services
 {

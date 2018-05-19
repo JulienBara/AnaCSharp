@@ -25,11 +25,12 @@ namespace AnaCSharp.DAL.Repositories
 
             // forge query
             var query = _anaContext
-                .DeterminingStates;
+                .DeterminingStates
+                .AsQueryable();
 
             for (var i = 0; i < n; i++)
             {
-                query.Where(x => x.DeterminingWords
+                query = query.Where(x => x.DeterminingWords
                         .Any(y => y.Word.Label == lastWords[i]
                                 && y.Order == n - i - 1));
             }
