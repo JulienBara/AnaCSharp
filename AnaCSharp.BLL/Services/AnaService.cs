@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using AnaCSharp.DAL;
+using AnaCSharp.DAL.Model;
 using AnaCSharp.DAL.Repositories;
 
 namespace AnaCSharp.BLL.Services
@@ -47,7 +49,6 @@ namespace AnaCSharp.BLL.Services
             if (!_lastWordsDictionary.ContainsKey(chatId))
             {
                 _lastWordsDictionary.Add(chatId, new List<string>());
-
             }
             return _lastWordsDictionary[chatId];
         }
@@ -78,6 +79,33 @@ namespace AnaCSharp.BLL.Services
                 var determiningStateId = _determiningStateRepository.GetDeterminingStateByLastWord(lastWords);
                 _determinedWordRepository.AddDeterminedWord(word, determiningStateId);
             }
+        }
+
+        public string GetBestWeightedRandomMessage(List<DeterminedWord> listWeightMessages)
+        {
+            var weightSum = 0;
+
+            foreach (var weightMessage in listWeightMessages)
+            {
+                weightSum += weightMessage.Number;
+            }
+
+            Random rnd = new Random();
+            int rand = rnd.Next(0, weightSum);
+
+            weightSum = 0;
+
+            foreach (var weightMessage in listWeightMessages)
+            {
+                weightSum += weightMessage.Number;
+                if (weightSum >= rand)
+                {
+                    return weightMessage.Word.Label;
+                }
+            }
+
+            // shouldn't be reached
+            return "";
         }
     }
 }
