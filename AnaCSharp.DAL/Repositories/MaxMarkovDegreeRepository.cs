@@ -16,7 +16,7 @@ namespace AnaCSharp.DAL.Repositories
             var markovDegree = _anaContext.MaxMarkovDegrees.FirstOrDefault();
             if (markovDegree != null)
             {
-                return markovDegree.MaxMarkovDegreeValue;
+                return markovDegree.Value;
             }
 
             return 0;
@@ -27,7 +27,7 @@ namespace AnaCSharp.DAL.Repositories
             var markovDegree = _anaContext.MaxMarkovDegrees.FirstOrDefault();
             if (markovDegree != null)
             {
-                markovDegree.MaxMarkovDegreeValue = value;
+                markovDegree.Value = value;
                 _anaContext.SaveChanges();
             }
         }

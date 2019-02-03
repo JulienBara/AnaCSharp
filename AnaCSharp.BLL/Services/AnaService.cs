@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using AnaCSharp.DAL;
 using AnaCSharp.DAL.Model;
 using AnaCSharp.DAL.Repositories;
@@ -78,9 +79,30 @@ namespace AnaCSharp.BLL.Services
             }
         }
 
-        public string GenerateAnswer(string text)
+        public string GenerateAnswer(string message)
         {
-            throw new NotImplementedException();
+            message += " EOM";
+            var words = message.Split(' ');
+
+            if (words.Length <= _markovDegree)
+                return "";
+
+            var lastWords = words.Skip(words.Length - _markovDegree).ToList();
+
+            var retMessage = "";
+
+            while(true)
+            {
+                var determinedWords =  _determinedWordRepository.FindDeterminedWords(lastWords);
+                if (!determinedWords.Any())
+                    break;
+                var bestweightedMessage = GetBestWeightedRandomMessage(determinedWords);
+                if (bestweightedMessage == "EOM")
+                    break;
+                retMessage += " " + bestweightedMessage;
+            }
+
+            return retMessage;
         }
 
         public void LearnAState(string word, List<string> lastWords, int markovDegree)

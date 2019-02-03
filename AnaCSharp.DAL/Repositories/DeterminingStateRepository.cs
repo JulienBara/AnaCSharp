@@ -18,6 +18,14 @@ namespace AnaCSharp.DAL.Repositories
             _wordRepository = wordRepository;
         }
 
+        public DeterminingState Find(int id)
+        {
+            var determiningState = _anaContext
+                .DeterminingStates
+                .FirstOrDefault(x => x.DeterminingStateId == id);
+            return determiningState;
+        }
+
         public int GetDeterminingStateByLastWord(List<string> lastWords)
         {
             // get markov degree
@@ -30,11 +38,14 @@ namespace AnaCSharp.DAL.Repositories
 
             for (var i = 0; i < n; i++)
             {
-                query = query.Where(x => x.DeterminingWords
-                        .Any(y => y.Word.Label == lastWords[i]
-                                && y.Order == n - i - 1));
+                var word = lastWords[i];
+                var order = n - i - 1;
+                query = query.Intersect(_anaContext
+                    .DeterminingStates
+                    .Where(x => x.DeterminingWords
+                        .Any(y => y.Word.Label == word
+                                && y.Order == order)));
             }
-
             var determiningState = query.FirstOrDefault();
 
             // if doesn't exist add
@@ -55,6 +66,7 @@ namespace AnaCSharp.DAL.Repositories
                 {
                     DeterminingWords = determiningWords
                 };
+                _anaContext.DeterminingStates.Add(newDeterminingState);
 
                 _anaContext.SaveChanges();
 

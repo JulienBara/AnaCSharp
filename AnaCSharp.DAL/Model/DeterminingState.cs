@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AnaCSharp.DAL.Model
 {
+    [Table("determiningStates")]
     public class DeterminingState
     {
         [Key]
+        [Column("determiningStateId")]
         public int DeterminingStateId { get; set; }
 
         public virtual ICollection<DeterminedWord> DeterminedWords { get; set; }

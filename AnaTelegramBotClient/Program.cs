@@ -6,10 +6,7 @@ using System.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.ReplyMarkups;
 using Unity;
-using Microsoft.EntityFrameworkCore;
 
 namespace AnaTelegramBotClient
 {
@@ -68,8 +65,6 @@ namespace AnaTelegramBotClient
                         break;
                     Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId); 
                     break;
-
-               
             }
         }
     }

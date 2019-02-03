@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AnaCSharp.DAL.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnaCSharp.DAL.Repositories
 {
@@ -49,20 +50,23 @@ namespace AnaCSharp.DAL.Repositories
             _anaContext.SaveChanges();
         }
 
-        public List<Tuple<string,int>> FindDeterminedWords(List<string> lastWords)
+        public List<DeterminedWord> FindDeterminedWords(List<string> lastWords)
         {
             var determiningStateId = _determiningStateRepository.GetDeterminingStateByLastWord(lastWords);
 
-            var determiningState = _anaContext.DeterminingStates.Find(determiningStateId);
+            var determiningState = _anaContext.DeterminingStates
+                .Include(x => x.DeterminedWords)
+                .FirstOrDefault(x => x.DeterminingStateId == determiningStateId);
 
-            var pairs = new List<Tuple<string, int>>();
+            return determiningState.DeterminedWords.ToList();
+            //var pairs = new List<Tuple<string, int>>();
 
-            foreach (var word in determiningState.DeterminedWords.ToList())
-            {
-                pairs.Add(new Tuple<string, int>(word.Word.Label, word.Number));
-            }
+            //foreach (var word in determiningState.DeterminedWords.ToList())
+            //{
+            //    pairs.Add(new Tuple<string, int>(word.Word.Label, word.Number));
+            //}
 
-            return pairs;
+            //return pairs;
         }
     }
 }

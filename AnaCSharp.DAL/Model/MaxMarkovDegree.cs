@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AnaCSharp.DAL.Model
 {
-    //[Table("maxMarkovDegree")]
+    [Table("maxMarkovDegree")]
     public class MaxMarkovDegree
     {
         [Key]
+        [Column("maxMarkovDegreeId")]
         public int MaxMarkovDegreeId { get; set; }
 
-        //[Column("maxMarkovDegree")]
-        public int MaxMarkovDegreeValue { get; set; }
+        [Column("maxMarkovDegree")]
+        public int Value { get; set; }
     }
 }
