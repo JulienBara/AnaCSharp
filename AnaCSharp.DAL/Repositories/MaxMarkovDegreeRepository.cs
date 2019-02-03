@@ -2,7 +2,7 @@
 
 namespace AnaCSharp.DAL.Repositories
 {
-    class MaxMarkovDegreeRepository
+    public class MaxMarkovDegreeRepository
     {
         private readonly AnaContext _anaContext;
 

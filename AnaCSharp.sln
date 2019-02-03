@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaCSharp", "AnaCSharp\AnaCSharp.csproj", "{ECAB8916-E2F7-440F-8E96-7C416ACE0124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp", "AnaCSharp\AnaCSharp.csproj", "{ECAB8916-E2F7-440F-8E96-7C416ACE0124}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}"
 EndProject
@@ -12,9 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		update.sh = update.sh
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaCSharp.BLL", "AnaCSharp.BLL\AnaCSharp.BLL.csproj", "{8830B1F6-9E79-42BC-B435-512CA6C86C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp.BLL", "AnaCSharp.BLL\AnaCSharp.BLL.csproj", "{8830B1F6-9E79-42BC-B435-512CA6C86C9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaCSharp.DAL", "AnaCSharp.DAL\AnaCSharp.DAL.csproj", "{68BA2B6A-4D14-4593-A3F8-98920AC7491D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp.DAL", "AnaCSharp.DAL\AnaCSharp.DAL.csproj", "{68BA2B6A-4D14-4593-A3F8-98920AC7491D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramBotClient", "AnaTelegramBotClient\AnaTelegramBotClient.csproj", "{6526DA82-F15C-4032-88CD-504706CBCE40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{68BA2B6A-4D14-4593-A3F8-98920AC7491D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68BA2B6A-4D14-4593-A3F8-98920AC7491D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BA2B6A-4D14-4593-A3F8-98920AC7491D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6526DA82-F15C-4032-88CD-504706CBCE40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6526DA82-F15C-4032-88CD-504706CBCE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6526DA82-F15C-4032-88CD-504706CBCE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6526DA82-F15C-4032-88CD-504706CBCE40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

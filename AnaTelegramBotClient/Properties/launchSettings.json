@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AnaTelegramBotClient": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Repos\\AnaCSharp\\AnaTelegramBotClient"
+    }
+  }
+}

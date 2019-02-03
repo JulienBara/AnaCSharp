@@ -13,19 +13,26 @@ namespace AnaCSharp.BLL.Services
         private readonly DeterminedWordRepository _determinedWordRepository;
         private readonly DeterminingStateRepository _determiningStateRepository;
         private readonly LogWordRepository _logWordRepository;
+        private readonly MaxMarkovDegreeRepository _maxMarkovDegreeRepository;
 
         private readonly Dictionary<int, List<string>> _lastWordsDictionary = new Dictionary<int, List<string>>();
+
+        private int _markovDegree;
 
         public AnaService(
             AnaContext anaContext,
             DeterminedWordRepository determinedWordRepository,
             DeterminingStateRepository determiningStateRepository,
-            LogWordRepository logWordRepository)
+            LogWordRepository logWordRepository,
+            MaxMarkovDegreeRepository maxMarkovDegreeRepository)
         {
             _anaContext = anaContext;
             _determinedWordRepository = determinedWordRepository;
             _determiningStateRepository = determiningStateRepository;
             _logWordRepository = logWordRepository;
+            _maxMarkovDegreeRepository = maxMarkovDegreeRepository;
+
+            _markovDegree = _maxMarkovDegreeRepository.GetMarkovDegree();
         }
 
         //public string AnalyzeLastChatMessage(string message, int chatId)
@@ -69,6 +76,11 @@ namespace AnaCSharp.BLL.Services
                 LearnAState(word, lastWords, markovDegree);
                 InsertNewWordInList(ref lastWords, word, markovDegree);
             }
+        }
+
+        public string GenerateAnswer(string text)
+        {
+            throw new NotImplementedException();
         }
 
         public void LearnAState(string word, List<string> lastWords, int markovDegree)
