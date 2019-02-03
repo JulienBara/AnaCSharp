@@ -51,9 +51,9 @@ namespace AnaCSharp.DAL.Repositories
 
         public List<Tuple<string,int>> FindDeterminedWords(List<string> lastWords)
         {
-            var determingStateId = _determiningStateRepository.GetDeterminingStateByLastWord(lastWords);
+            var determiningStateId = _determiningStateRepository.GetDeterminingStateByLastWord(lastWords);
 
-            var determiningState = _anaContext.DeterminingStates.Find(determingStateId);
+            var determiningState = _anaContext.DeterminingStates.Find(determiningStateId);
 
             var pairs = new List<Tuple<string, int>>();
 

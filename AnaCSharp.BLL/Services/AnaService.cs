@@ -43,7 +43,6 @@ namespace AnaCSharp.BLL.Services
             }
         }
 
-
         public List<string> GetLastWordsOfChat(int chatId)
         {
             if (!_lastWordsDictionary.ContainsKey(chatId))
