@@ -59,8 +59,8 @@ namespace AnaTelegramBotClient
                     muted = true;
                     Bot.SendTextMessageAsync(message.Chat.Id, "Ana unmuted");
                     break;
+                // Compute message
                 default:
-                    // Compute message
                     if (muted)
                         break;
                     Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId); 
