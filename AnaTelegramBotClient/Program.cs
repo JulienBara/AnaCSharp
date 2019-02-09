@@ -56,14 +56,15 @@ namespace AnaTelegramBotClient
                     break;
                 // Unmute
                 case "/unmute":
-                    muted = true;
+                    muted = false;
                     Bot.SendTextMessageAsync(message.Chat.Id, "Ana unmuted");
                     break;
                 // Compute message
                 default:
                     if (muted)
                         break;
-                    Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId); 
+                    Bot.SendTextMessageAsync(message.Chat.Id, "Je suis une poule");
+                    //Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId); 
                     break;
             }
         }

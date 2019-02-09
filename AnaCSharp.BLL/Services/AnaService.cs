@@ -33,7 +33,7 @@ namespace AnaCSharp.BLL.Services
             _logWordRepository = logWordRepository;
             _maxMarkovDegreeRepository = maxMarkovDegreeRepository;
 
-            _markovDegree = _maxMarkovDegreeRepository.GetMarkovDegree();
+            //_markovDegree = _maxMarkovDegreeRepository.GetMarkovDegree();
         }
 
         //public string AnalyzeLastChatMessage(string message, int chatId)

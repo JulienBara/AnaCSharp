@@ -4,9 +4,8 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>386a6e41-79cf-4e22-9e22-3eae92d83fb4</ProjectGuid>
-    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/values</DockerServiceUrl>
-    <DockerServiceName>anacsharp</DockerServiceName>
+    <DockerLaunchAction>None</DockerLaunchAction>
+    <DockerServiceName>anatelegrambotclient</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
