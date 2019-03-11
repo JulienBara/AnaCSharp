@@ -9,5 +9,5 @@ services:
   anatelegrambotclient:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "81:80"
+   # ports:
+   #   - "81:80"

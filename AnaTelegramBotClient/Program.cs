@@ -3,6 +3,8 @@ using AnaCSharp.DAL;
 using AnaCSharp.DAL.Repositories;
 using System;
 using System.Linq;
+using AnaCSharp.DAL.Model;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
@@ -13,22 +15,31 @@ namespace AnaTelegramBotClient
     class Program
     {
         private static readonly TelegramBotClient Bot = new TelegramBotClient("your key");
-        private static AnaService _anaService = null;
+        private static AnaService _anaService;
+        private static AnaContext _anaContext;
         private static bool muted = false;
 
         static void Main(string[] args)
         {
             // prepare AnaService
             IUnityContainer container = new UnityContainer();
-            container.AddExtension(new Diagnostic());
+            //container.AddExtension(new Diagnostic());
+
+            container.RegisterType<AnaContext>();
+            _anaContext = container.Resolve<AnaContext>();
+            _anaContext.Database.Migrate();
+            var maxMarkovDegree = _anaContext.MaxMarkovDegrees.ToList().FirstOrDefault();
+            if (maxMarkovDegree == null)
+            {
+                _anaContext.MaxMarkovDegrees.Add(new MaxMarkovDegree { Value = 3 });
+                _anaContext.SaveChanges();
+            }
 
             container.RegisterType<AnaService>();
-            container.RegisterType<AnaContext>();
             container.RegisterType<DeterminedWordRepository>();
             container.RegisterType<DeterminingStateRepository>();
 
             _anaService = container.Resolve<AnaService>();
-
 
             var me = Bot.GetMeAsync().Result;
             Console.Title = me.Username;
@@ -63,8 +74,7 @@ namespace AnaTelegramBotClient
                 default:
                     if (muted)
                         break;
-                    Bot.SendTextMessageAsync(message.Chat.Id, "Je suis une poule");
-                    //Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId); 
+                    Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId);
                     break;
             }
         }

@@ -13,8 +13,8 @@ namespace AnaCSharp.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseLoggerFactory(MyLoggerFactory)
-                .UseSqlite("Data Source=ana.db")
+                //.UseLoggerFactory(MyLoggerFactory)
+                .UseSqlServer("Server=db;Database=master;User=sa;Password=Your_password123;")
                 //.EnableSensitiveDataLogging()
                 ;
         }
