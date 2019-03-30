@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using AnaCSharp.DAL;
 using AnaCSharp.DAL.Model;
@@ -13,51 +12,19 @@ namespace AnaCSharp.BLL.Services
         private readonly AnaContext _anaContext;
         private readonly DeterminedWordRepository _determinedWordRepository;
         private readonly DeterminingStateRepository _determiningStateRepository;
-        private readonly LogWordRepository _logWordRepository;
-        private readonly MaxMarkovDegreeRepository _maxMarkovDegreeRepository;
 
         private readonly Dictionary<int, List<string>> _lastWordsDictionary = new Dictionary<int, List<string>>();
 
-        private int _markovDegree;
+        private int _markovDegree = 2;
 
         public AnaService(
             AnaContext anaContext,
             DeterminedWordRepository determinedWordRepository,
-            DeterminingStateRepository determiningStateRepository,
-            LogWordRepository logWordRepository,
-            MaxMarkovDegreeRepository maxMarkovDegreeRepository)
+            DeterminingStateRepository determiningStateRepository)
         {
             _anaContext = anaContext;
             _determinedWordRepository = determinedWordRepository;
             _determiningStateRepository = determiningStateRepository;
-            _logWordRepository = logWordRepository;
-            _maxMarkovDegreeRepository = maxMarkovDegreeRepository;
-
-            _markovDegree = _maxMarkovDegreeRepository.GetMarkovDegree();
-        }
-
-        //public string AnalyzeLastChatMessage(string message, int chatId)
-        //{
-        //    message = message + " EOM";
-
-        //}
-
-        public void LogMessages(string message, int chatId)
-        {
-            var words = message.Split();
-            foreach (var word in words)
-            {
-                _logWordRepository.SaveLogWord(chatId, word);
-            }
-        }
-
-        public List<string> GetLastWordsOfChat(int chatId)
-        {
-            if (!_lastWordsDictionary.ContainsKey(chatId))
-            {
-                _lastWordsDictionary.Add(chatId, new List<string>());
-            }
-            return _lastWordsDictionary[chatId];
         }
 
         public void InsertNewWordInList(ref List<string> list, string word, int markovDegree)
@@ -69,13 +36,13 @@ namespace AnaCSharp.BLL.Services
             }
         }
 
-        public void Learn(string message, int chatId, ref List<string> lastWords, int markovDegree)
+        public void Learn(string message, ref List<string> lastWords)
         {
             var words = message.Split();
             foreach (var word in words)
             {
-                LearnAState(word, lastWords, markovDegree);
-                InsertNewWordInList(ref lastWords, word, markovDegree);
+                LearnAState(word, lastWords, _markovDegree);
+                InsertNewWordInList(ref lastWords, word, _markovDegree);
             }
         }
 

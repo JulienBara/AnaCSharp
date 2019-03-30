@@ -21,8 +21,6 @@ namespace AnaCSharp.DAL
 
         public DbSet<DeterminingState> DeterminingStates { get; set; }
         public DbSet<DeterminedWord> DeterminedWords { get; set; }
-        public DbSet<LogWord> LogWords { get; set; }
-        public DbSet<MaxMarkovDegree> MaxMarkovDegrees { get; set; }
         public DbSet<Word> Words { get; set; }
     }
 }

@@ -2,7 +2,7 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/2.2-sdk AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
 COPY AnaTelegramBotClient/AnaTelegramBotClient.csproj AnaTelegramBotClient/
 COPY AnaCSharp.BLL/AnaCSharp.BLL.csproj AnaCSharp.BLL/

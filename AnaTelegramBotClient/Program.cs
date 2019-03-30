@@ -3,7 +3,6 @@ using AnaCSharp.DAL;
 using AnaCSharp.DAL.Repositories;
 using System;
 using System.Linq;
-using AnaCSharp.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -23,17 +22,10 @@ namespace AnaTelegramBotClient
         {
             // prepare AnaService
             IUnityContainer container = new UnityContainer();
-            //container.AddExtension(new Diagnostic());
 
             container.RegisterType<AnaContext>();
             _anaContext = container.Resolve<AnaContext>();
             _anaContext.Database.Migrate();
-            var maxMarkovDegree = _anaContext.MaxMarkovDegrees.ToList().FirstOrDefault();
-            if (maxMarkovDegree == null)
-            {
-                _anaContext.MaxMarkovDegrees.Add(new MaxMarkovDegree { Value = 3 });
-                _anaContext.SaveChanges();
-            }
 
             container.RegisterType<AnaService>();
             container.RegisterType<DeterminedWordRepository>();

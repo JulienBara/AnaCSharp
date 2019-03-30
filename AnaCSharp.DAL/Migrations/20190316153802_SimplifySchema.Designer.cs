@@ -3,14 +3,16 @@ using AnaCSharp.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AnaCSharp.DAL.Migrations
 {
     [DbContext(typeof(AnaContext))]
-    partial class AnaContextModelSnapshot : ModelSnapshot
+    [Migration("20190316153802_SimplifySchema")]
+    partial class SimplifySchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
