@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using AnaCSharp.BLL.Services;
@@ -11,6 +10,7 @@ using AnaCSharp.DAL.Repositories;
 using Microsoft.AspNetCore.Html;
 using Microsoft.EntityFrameworkCore;
 using Unity;
+using Unity.Injection;
 
 namespace AnaTelegramImport
 {
@@ -39,7 +39,8 @@ namespace AnaTelegramImport
             // prepare AnaService
             IUnityContainer container = new UnityContainer();
 
-            container.RegisterType<AnaContext>();
+            var connectionString = "Server=localhost,1434;Database=master;User=sa;Password=Your_password123";
+            container.RegisterType<AnaContext>(new InjectionConstructor(connectionString));
             var anaContext = container.Resolve<AnaContext>();
             anaContext.Database.Migrate();
 
@@ -61,7 +62,7 @@ namespace AnaTelegramImport
 
                 foreach (var elem in elemListDeHtmlised)
                 {
-                    anaService.Learn(elem, ref lastWord);
+                    anaService.Learn(elem.Trim(), ref lastWord);
                 }
                 
             }

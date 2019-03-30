@@ -56,6 +56,7 @@ namespace AnaCSharp.DAL.Repositories
 
             var determiningState = _anaContext.DeterminingStates
                 .Include(x => x.DeterminedWords)
+                    .ThenInclude(x => x.Word)
                 .FirstOrDefault(x => x.DeterminingStateId == determiningStateId);
 
             return determiningState.DeterminedWords.ToList();

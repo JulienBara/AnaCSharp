@@ -8,6 +8,7 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Unity;
+using Unity.Injection;
 
 namespace AnaTelegramBotClient
 {
@@ -23,7 +24,8 @@ namespace AnaTelegramBotClient
             // prepare AnaService
             IUnityContainer container = new UnityContainer();
 
-            container.RegisterType<AnaContext>();
+            var connectionString = "Server=localhost,1434;Database=master;User=sa;Password=Your_password123";
+            container.RegisterType<AnaContext>(new InjectionConstructor(connectionString));
             _anaContext = container.Resolve<AnaContext>();
             _anaContext.Database.Migrate();
 

@@ -38,6 +38,7 @@ namespace AnaCSharp.BLL.Services
 
         public void Learn(string message, ref List<string> lastWords)
         {
+            message += " EOM";
             var words = message.Split();
             foreach (var word in words)
             {
@@ -67,6 +68,7 @@ namespace AnaCSharp.BLL.Services
                 if (bestweightedMessage == "EOM")
                     break;
                 retMessage += " " + bestweightedMessage;
+                InsertNewWordInList(ref lastWords, bestweightedMessage, _markovDegree);
             }
 
             return retMessage;
