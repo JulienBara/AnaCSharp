@@ -40,7 +40,8 @@ namespace AnaTelegramImport
             IUnityContainer container = new UnityContainer();
 
             var connectionString = "Server=localhost,1434;Database=master;User=sa;Password=Your_password123";
-            container.RegisterType<AnaContext>(new InjectionConstructor(connectionString));
+            var contextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
+            container.RegisterType<AnaContext>(new InjectionConstructor(contextOptions));
             var anaContext = container.Resolve<AnaContext>();
             anaContext.Database.Migrate();
 
