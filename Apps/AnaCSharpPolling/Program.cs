@@ -17,11 +17,9 @@ namespace AnaCSharpPolling
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
+                .AddJsonFile("appsettings.json", true, true);
 
-            IConfiguration config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", true, true)
-                .Build();
+            IConfiguration config = builder.Build();
 
             Bot = new TelegramBotClient(config["botToken"]);
 
