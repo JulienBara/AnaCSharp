@@ -1,6 +1,6 @@
-﻿namespace AnaCSharp.DAL.Model
+﻿namespace AnaCsharp.Dal.Interfaces.Dtos
 {
-    public class Word
+    public class Word : IWord
     {
         public int WordId { get; set; }
 

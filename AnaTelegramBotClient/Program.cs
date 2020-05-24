@@ -69,7 +69,7 @@ namespace AnaTelegramBotClient
                 default:
                     if (muted)
                         break;
-                    Bot.SendTextMessageAsync(message.Chat.Id, _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId);
+                    Bot.SendTextMessageAsync(message.Chat.Id, await _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId);
                     break;
             }
         }

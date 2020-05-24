@@ -2,8 +2,8 @@
 
 namespace AnaCSharp.DAL.Repositories
 {
-    public interface IWordRepository
+    public interface IWordQueryRepository
     {
-        Task<int> GetWordIdByLabel(string label);
+        Task<int> GetWordIdByLabelAsync(string label);
     }
 }

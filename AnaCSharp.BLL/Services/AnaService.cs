@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AnaCsharp.Dal.Interfaces.Dtos;
 using AnaCSharp.DAL;
-using AnaCSharp.DAL.Model;
 using AnaCSharp.DAL.Repositories;
 
 namespace AnaCSharp.BLL.Services
@@ -47,7 +48,7 @@ namespace AnaCSharp.BLL.Services
             }
         }
 
-        public string GenerateAnswer(string message)
+        public async Task<string> GenerateAnswer(string message)
         {
             message += " EOM";
             var words = message.Split(' ');
@@ -61,7 +62,7 @@ namespace AnaCSharp.BLL.Services
 
             while(true)
             {
-                var determinedWords =  _determinedWordRepository.FindDeterminedWords(lastWords);
+                var determinedWords =  await _determinedWordRepository.FindDeterminedWordsAsync(lastWords);
                 if (!determinedWords.Any())
                     break;
                 var bestweightedMessage = GetBestWeightedRandomMessage(determinedWords);
@@ -74,16 +75,16 @@ namespace AnaCSharp.BLL.Services
             return retMessage;
         }
 
-        public void LearnAState(string word, List<string> lastWords, int markovDegree)
+        public async void LearnAState(string word, List<string> lastWords, int markovDegree)
         {
             if (lastWords.Count == markovDegree)
             {
-                var determiningStateId = _determiningStateRepository.GetDeterminingStateByLastWord(lastWords);
-                _determinedWordRepository.AddDeterminedWord(word, determiningStateId);
+                var determiningStateId = await _determiningStateRepository.GetDeterminingStateByLastWordAsync(lastWords);
+                await _determinedWordRepository.AddDeterminedWordAsync(word, determiningStateId);
             }
         }
 
-        public string GetBestWeightedRandomMessage(List<DeterminedWord> listWeightMessages)
+        public string GetBestWeightedRandomMessage(IEnumerable<IDeterminedWord> listWeightMessages)
         {
             var weightSum = 0;
 

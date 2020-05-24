@@ -5,8 +5,6 @@ namespace AnaCSharp.DAL.Repositories
 {
     public interface IDeterminingStateQueryRepository
     {
-        Task FindAsync(int id);
-
         Task<int> GetDeterminingStateByLastWordAsync(IEnumerable<string> lastWords);
     }
 }

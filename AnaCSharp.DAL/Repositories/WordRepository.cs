@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Threading.Tasks;
+using AnaCsharp.Dal.Interfaces.Repositories.Commands;
 using AnaCSharp.DAL.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnaCSharp.DAL.Repositories
 {
-    public class WordRepository
+    public class WordRepository : IWordCommandRepository, IWordQueryRepository
     {
         private readonly AnaContext _anaContext;
 
@@ -12,11 +14,16 @@ namespace AnaCSharp.DAL.Repositories
             _anaContext = anaContext;
         }
 
-        public int GetWordIdByLabel(string label)
+        public Task<int> AddWordAsync(string labels)
         {
-            var word = _anaContext
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<int> GetWordIdByLabelAsync(string label)
+        {
+            var word = await _anaContext
                 .Words
-                .FirstOrDefault(x => x.Label == label);
+                .FirstOrDefaultAsync(x => x.Label == label);
 
             if (word == null)
             {

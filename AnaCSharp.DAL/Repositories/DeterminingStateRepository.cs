@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AnaCsharp.Dal.Interfaces.Repositories.Commands;
 using AnaCSharp.DAL.Model;
 
 namespace AnaCSharp.DAL.Repositories
 {
-    public class DeterminingStateRepository
+    public class DeterminingStateRepository : IDeterminingStateCommandRepository, IDeterminingStateQueryRepository
     {
         private readonly AnaContext _anaContext;
         private readonly WordRepository _wordRepository;
@@ -18,18 +20,15 @@ namespace AnaCSharp.DAL.Repositories
             _wordRepository = wordRepository;
         }
 
-        public DeterminingState Find(int id)
+        public Task<int> AddDeterminingStateAsync(IEnumerable<string> lastWords)
         {
-            var determiningState = _anaContext
-                .DeterminingStates
-                .FirstOrDefault(x => x.DeterminingStateId == id);
-            return determiningState;
+            throw new System.NotImplementedException();
         }
 
-        public int GetDeterminingStateByLastWord(List<string> lastWords)
+        public async Task<int> GetDeterminingStateByLastWordAsync(IEnumerable<string> lastWords)
         {
             // get markov degree
-            var n = lastWords.Count;
+            var n = lastWords.Count();
 
             // forge query
             var query = _anaContext
@@ -38,7 +37,7 @@ namespace AnaCSharp.DAL.Repositories
 
             for (var i = 0; i < n; i++)
             {
-                var word = lastWords[i];
+                var word = lastWords.ToArray()[i];
                 var order = n - i - 1;
                 query = query.Intersect(_anaContext
                     .DeterminingStates
@@ -56,7 +55,7 @@ namespace AnaCSharp.DAL.Repositories
                 {
                     var newDeterminingWord = new DeterminingWord
                     {
-                        WordId = _wordRepository.GetWordIdByLabel(lastWords[i]),
+                        WordId = await _wordRepository.GetWordIdByLabelAsync(lastWords.ToArray()[i]),
                         Order = n - i - 1
                     };
                     determiningWords.Add(newDeterminingWord);
