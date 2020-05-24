@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp", "AnaCSharp\AnaCSharp.csproj", "{ECAB8916-E2F7-440F-8E96-7C416ACE0124}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramBotClient", "AnaTelegramBotClient\AnaTelegramBotClient.csproj", "{6526DA82-F15C-4032-88CD-504706CBCE40}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramImport", "AnaTelegramImport\AnaTelegramImport.csproj", "{6154756B-7EED-47F8-86EC-BCEA3B401A98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharpPolling", "AnaCSharpPolling\AnaCSharpPolling.csproj", "{0C25A852-8345-4627-9913-193D174F6E12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C25A852-8345-4627-9913-193D174F6E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C25A852-8345-4627-9913-193D174F6E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C25A852-8345-4627-9913-193D174F6E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C25A852-8345-4627-9913-193D174F6E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
