@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AnaCSharp.BLL\AnaCSharp.BLL.csproj" />
+    <ProjectReference Include="..\Bll\AnaCSharp.Bll\AnaCSharp.BLL.csproj" />
     <ProjectReference Include="..\Dal\AnaCsharp.Dal.SqlServer\AnaCsharp.Dal.SqlServer.csproj" />
   </ItemGroup>
 
