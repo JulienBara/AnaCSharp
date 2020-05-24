@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramImport", "AnaTel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharpPolling", "AnaCSharpPolling\AnaCSharpPolling.csproj", "{0C25A852-8345-4627-9913-193D174F6E12}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dal", "Dal", "{B78D06B9-BDF1-4A9E-AAF1-CBC9073E27B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCsharp.Dal.Interfaces", "Dal\AnaCsharp.Dal.Interfaces\AnaCsharp.Dal.Interfaces.csproj", "{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,9 +61,16 @@ Global
 		{0C25A852-8345-4627-9913-193D174F6E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C25A852-8345-4627-9913-193D174F6E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C25A852-8345-4627-9913-193D174F6E12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA} = {B78D06B9-BDF1-4A9E-AAF1-CBC9073E27B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FA09521-F8E8-4581-B738-9D9CBBB5E72B}
