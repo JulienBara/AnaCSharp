@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AnaCSharp.DAL.Model;
 using Microsoft.EntityFrameworkCore;
@@ -60,14 +59,6 @@ namespace AnaCSharp.DAL.Repositories
                 .FirstOrDefault(x => x.DeterminingStateId == determiningStateId);
 
             return determiningState.DeterminedWords.ToList();
-            //var pairs = new List<Tuple<string, int>>();
-
-            //foreach (var word in determiningState.DeterminedWords.ToList())
-            //{
-            //    pairs.Add(new Tuple<string, int>(word.Word.Label, word.Number));
-            //}
-
-            //return pairs;
         }
     }
 }
