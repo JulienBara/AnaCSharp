@@ -3,27 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AnaCsharp.Dal.Interfaces.Dtos;
-using AnaCSharp.DAL;
 using AnaCSharp.DAL.Repositories;
 
 namespace AnaCSharp.BLL.Services
 {
     public class AnaService
     {
-        private readonly AnaContext _anaContext;
         private readonly DeterminedWordRepository _determinedWordRepository;
         private readonly DeterminingStateRepository _determiningStateRepository;
-
-        private readonly Dictionary<int, List<string>> _lastWordsDictionary = new Dictionary<int, List<string>>();
 
         private int _markovDegree = 2;
 
         public AnaService(
-            AnaContext anaContext,
             DeterminedWordRepository determinedWordRepository,
             DeterminingStateRepository determiningStateRepository)
         {
-            _anaContext = anaContext;
             _determinedWordRepository = determinedWordRepository;
             _determiningStateRepository = determiningStateRepository;
         }
