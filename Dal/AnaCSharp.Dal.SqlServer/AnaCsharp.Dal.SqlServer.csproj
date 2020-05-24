@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dal\AnaCsharp.Dal.Interfaces\AnaCsharp.Dal.Interfaces.csproj" />
+    <ProjectReference Include="..\AnaCsharp.Dal.Interfaces\AnaCsharp.Dal.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

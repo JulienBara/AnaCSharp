@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AnaCSharp.DAL\AnaCSharp.DAL.csproj" />
+    <ProjectReference Include="..\Dal\AnaCsharp.Dal.SqlServer\AnaCsharp.Dal.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

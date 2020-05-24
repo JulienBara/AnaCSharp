@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AnaCSharp.BLL\AnaCSharp.BLL.csproj" />
-    <ProjectReference Include="..\AnaCSharp.DAL\AnaCSharp.DAL.csproj" />
   </ItemGroup>
 
 </Project>
