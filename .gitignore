@@ -265,3 +265,6 @@ __pycache__/
 
 # Input
 /AnaTelegramImport/Input/
+
+# Settings
+/Apps/AnaCSharpPolling/appsettings.json
