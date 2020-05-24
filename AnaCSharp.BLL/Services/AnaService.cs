@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AnaCsharp.Dal.Interfaces.Dtos;
+using AnaCSharp.Bll.Interfaces.Services.Commands;
+using AnaCSharp.Bll.Interfaces.Services.Queries;
 using AnaCSharp.DAL.Repositories;
 
 namespace AnaCSharp.BLL.Services
 {
-    public class AnaService
+    public class AnaService : IAnswerQueryService, ILearnCommandService
     {
         private readonly DeterminedWordRepository _determinedWordRepository;
         private readonly DeterminingStateRepository _determiningStateRepository;
@@ -22,27 +25,21 @@ namespace AnaCSharp.BLL.Services
             _determiningStateRepository = determiningStateRepository;
         }
 
-        public void InsertNewWordInList(ref List<string> list, string word, int markovDegree)
-        {
-            list.Add(word);
-            if (list.Count > markovDegree)
-            {
-                list.RemoveAt(0);
-            }
-        }
-
-        public void Learn(string message, ref List<string> lastWords)
+        public Task LearnAsync(string message, IEnumerable<string> lastWords)
         {
             message += " EOM";
             var words = message.Split();
+            var lastWordsqueue = new Queue(lastWords.ToArray());
             foreach (var word in words)
             {
                 LearnAState(word, lastWords, _markovDegree);
-                InsertNewWordInList(ref lastWords, word, _markovDegree);
+                lastWordsqueue.Enqueue(word);
+                lastWordsqueue.Dequeue();
             }
+            return Task.CompletedTask;
         }
 
-        public async Task<string> GenerateAnswer(string message)
+        public async Task<string> GenerateAnswerAsync(string message)
         {
             message += " EOM";
             var words = message.Split(' ');
@@ -54,24 +51,27 @@ namespace AnaCSharp.BLL.Services
 
             var retMessage = "";
 
-            while(true)
+            var lastWordsqueue = new Queue(lastWords.ToArray());
+
+            while (true)
             {
-                var determinedWords =  await _determinedWordRepository.FindDeterminedWordsAsync(lastWords);
+                var determinedWords = await _determinedWordRepository.FindDeterminedWordsAsync(lastWords);
                 if (!determinedWords.Any())
                     break;
                 var bestweightedMessage = GetBestWeightedRandomMessage(determinedWords);
                 if (bestweightedMessage == "EOM")
                     break;
                 retMessage += " " + bestweightedMessage;
-                InsertNewWordInList(ref lastWords, bestweightedMessage, _markovDegree);
+                lastWordsqueue.Enqueue(bestweightedMessage);
+                lastWordsqueue.Dequeue();
             }
 
             return retMessage;
         }
 
-        public async void LearnAState(string word, List<string> lastWords, int markovDegree)
+        public async void LearnAState(string word, IEnumerable<string> lastWords, int markovDegree)
         {
-            if (lastWords.Count == markovDegree)
+            if (lastWords.Count() == markovDegree)
             {
                 var determiningStateId = await _determiningStateRepository.GetDeterminingStateByLastWordAsync(lastWords);
                 await _determinedWordRepository.AddDeterminedWordAsync(word, determiningStateId);

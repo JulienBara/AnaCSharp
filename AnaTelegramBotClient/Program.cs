@@ -1,9 +1,9 @@
 ﻿using AnaCSharp.BLL.Services;
 using AnaCSharp.DAL;
 using AnaCSharp.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
@@ -69,7 +69,8 @@ namespace AnaTelegramBotClient
                 default:
                     if (muted)
                         break;
-                    Bot.SendTextMessageAsync(message.Chat.Id, await _anaService.GenerateAnswer(message.Text), replyToMessageId: message.MessageId);
+                    var answer = await _anaService.GenerateAnswerAsync(message.Text);
+                    Bot.SendTextMessageAsync(message.Chat.Id, answer, replyToMessageId: message.MessageId);
                     break;
             }
         }

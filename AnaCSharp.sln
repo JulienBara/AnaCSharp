@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		update.sh = update.sh
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp.BLL", "AnaCSharp.BLL\AnaCSharp.BLL.csproj", "{8830B1F6-9E79-42BC-B435-512CA6C86C9E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramBotClient", "AnaTelegramBotClient\AnaTelegramBotClient.csproj", "{6526DA82-F15C-4032-88CD-504706CBCE40}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramImport", "AnaTelegramImport\AnaTelegramImport.csproj", "{6154756B-7EED-47F8-86EC-BCEA3B401A98}"
@@ -26,6 +24,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCsharp.Dal.Interfaces", "Dal\AnaCsharp.Dal.Interfaces\AnaCsharp.Dal.Interfaces.csproj", "{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCsharp.Dal.SqlServer", "Dal\AnaCsharp.Dal.SqlServer\AnaCsharp.Dal.SqlServer.csproj", "{A5F49AE7-B5AB-4D03-8A5E-C10AAD76F080}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bll", "Bll", "{6C23D051-BA89-4C41-A171-B549BB06C4C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp.Bll.Interfaces", "Bll\AnaCSharp.Bll.Interfaces\AnaCSharp.Bll.Interfaces.csproj", "{62E04DDE-DB75-460B-A62B-07508EB7B7E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp.BLL", "AnaCSharp.BLL\AnaCSharp.BLL.csproj", "{4499CB6C-7F03-4105-AB3E-977855F42E6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +45,6 @@ Global
 		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8830B1F6-9E79-42BC-B435-512CA6C86C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8830B1F6-9E79-42BC-B435-512CA6C86C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8830B1F6-9E79-42BC-B435-512CA6C86C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8830B1F6-9E79-42BC-B435-512CA6C86C9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6526DA82-F15C-4032-88CD-504706CBCE40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6526DA82-F15C-4032-88CD-504706CBCE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6526DA82-F15C-4032-88CD-504706CBCE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,6 +65,14 @@ Global
 		{A5F49AE7-B5AB-4D03-8A5E-C10AAD76F080}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F49AE7-B5AB-4D03-8A5E-C10AAD76F080}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F49AE7-B5AB-4D03-8A5E-C10AAD76F080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E04DDE-DB75-460B-A62B-07508EB7B7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E04DDE-DB75-460B-A62B-07508EB7B7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E04DDE-DB75-460B-A62B-07508EB7B7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E04DDE-DB75-460B-A62B-07508EB7B7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4499CB6C-7F03-4105-AB3E-977855F42E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4499CB6C-7F03-4105-AB3E-977855F42E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4499CB6C-7F03-4105-AB3E-977855F42E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4499CB6C-7F03-4105-AB3E-977855F42E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA} = {B78D06B9-BDF1-4A9E-AAF1-CBC9073E27B0}
 		{A5F49AE7-B5AB-4D03-8A5E-C10AAD76F080} = {B78D06B9-BDF1-4A9E-AAF1-CBC9073E27B0}
+		{62E04DDE-DB75-460B-A62B-07508EB7B7E1} = {6C23D051-BA89-4C41-A171-B549BB06C4C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FA09521-F8E8-4581-B738-9D9CBBB5E72B}

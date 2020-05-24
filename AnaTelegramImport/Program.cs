@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using AnaCSharp.BLL.Services;
@@ -16,7 +17,7 @@ namespace AnaTelegramImport
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine($"Current Directory: {currentDirectory}");
@@ -63,7 +64,7 @@ namespace AnaTelegramImport
 
                 foreach (var elem in elemListDeHtmlised)
                 {
-                    anaService.Learn(elem.Trim(), ref lastWord);
+                    await anaService.LearnAsync(elem.Trim(), lastWord);
                 }
                 
             }
