@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AnaCSharp.DAL.Repositories
+namespace AnaCsharp.Dal.Interfaces.Repositories.Queries
 {
     public interface IDeterminingStateQueryRepository
     {

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AnaCsharp.Dal.Interfaces.Repositories.Commands;
+using AnaCsharp.Dal.Interfaces.Repositories.Queries;
 using AnaCSharp.DAL.Model;
 
 namespace AnaCSharp.DAL.Repositories

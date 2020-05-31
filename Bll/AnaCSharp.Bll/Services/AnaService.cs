@@ -4,25 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AnaCsharp.Dal.Interfaces.Dtos;
+using AnaCsharp.Dal.Interfaces.Repositories.Commands;
+using AnaCsharp.Dal.Interfaces.Repositories.Queries;
 using AnaCSharp.Bll.Interfaces.Services.Commands;
 using AnaCSharp.Bll.Interfaces.Services.Queries;
-using AnaCSharp.DAL.Repositories;
 
 namespace AnaCSharp.BLL.Services
 {
     public class AnaService : IAnswerQueryService, ILearnCommandService
     {
-        private readonly DeterminedWordRepository _determinedWordRepository;
-        private readonly DeterminingStateRepository _determiningStateRepository;
+        private readonly IDeterminedWordCommandRepository _determinedWordCommandRepository;
+        private readonly IDeterminedWordQueryRepository _determinedWordQueryRepository;
+        private readonly IDeterminingStateQueryRepository _determiningStateQueryRepository;
 
         private int _markovDegree = 2;
 
         public AnaService(
-            DeterminedWordRepository determinedWordRepository,
-            DeterminingStateRepository determiningStateRepository)
+            IDeterminedWordCommandRepository determinedWordCommandRepository,
+            IDeterminedWordQueryRepository determinedWordQueryRepository,
+            IDeterminingStateQueryRepository determiningStateQueryRepository)
         {
-            _determinedWordRepository = determinedWordRepository;
-            _determiningStateRepository = determiningStateRepository;
+            _determinedWordCommandRepository = determinedWordCommandRepository;
+            _determinedWordQueryRepository = determinedWordQueryRepository;
+            _determiningStateQueryRepository = determiningStateQueryRepository;
         }
 
         public Task LearnAsync(string message, IEnumerable<string> lastWords)
@@ -55,7 +59,7 @@ namespace AnaCSharp.BLL.Services
 
             while (true)
             {
-                var determinedWords = await _determinedWordRepository.FindDeterminedWordsAsync(lastWords);
+                var determinedWords = await _determinedWordQueryRepository.FindDeterminedWordsAsync(lastWords);
                 if (!determinedWords.Any())
                     break;
                 var bestweightedMessage = GetBestWeightedRandomMessage(determinedWords);
@@ -73,8 +77,8 @@ namespace AnaCSharp.BLL.Services
         {
             if (lastWords.Count() == markovDegree)
             {
-                var determiningStateId = await _determiningStateRepository.GetDeterminingStateByLastWordAsync(lastWords);
-                await _determinedWordRepository.AddDeterminedWordAsync(word, determiningStateId);
+                var determiningStateId = await _determiningStateQueryRepository.GetDeterminingStateByLastWordAsync(lastWords);
+                await _determinedWordCommandRepository.AddDeterminedWordAsync(word, determiningStateId);
             }
         }
 
