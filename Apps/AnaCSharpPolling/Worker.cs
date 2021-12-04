@@ -81,6 +81,8 @@ namespace AnaCSharpPolling
                     if (muted)
                         break;
                     var answer = await _anaQueryService.GenerateAnswerAsync(messageText);
+                    if (answer == null)
+                        break;
                     await botClient.SendTextMessageAsync(chatId, answer, cancellationToken: cancellationToken, replyToMessageId: messageId);
                     break;
             }

@@ -49,7 +49,7 @@ namespace AnaCSharp.BLL.Services
             var words = message.Split(' ');
 
             if (words.Length <= _markovDegree)
-                return "";
+                return null;
 
             var lastWords = words.Skip(words.Length - _markovDegree).ToList();
 
