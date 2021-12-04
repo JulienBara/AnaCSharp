@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AnaCSharp.Bll.Interfaces.Services.Queries;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,15 +18,18 @@ namespace AnaCSharpPolling
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<Worker> _logger;
+        private readonly IAnswerQueryService _anaQueryService;
         private bool muted = true;
 
         public Worker(
             IConfiguration configuration,
-            ILogger<Worker> logger
+            ILogger<Worker> logger,
+            IAnswerQueryService anaQueryService
             )
         {
             _configuration = configuration;
             _logger = logger;
+            _anaQueryService = anaQueryService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -76,7 +80,7 @@ namespace AnaCSharpPolling
                 default:
                     if (muted)
                         break;
-                    var answer = "pouet"; // await _anaService.GenerateAnswerAsync(message.Text);
+                    var answer = await _anaQueryService.GenerateAnswerAsync(messageText);
                     await botClient.SendTextMessageAsync(chatId, answer, cancellationToken: cancellationToken, replyToMessageId: messageId);
                     break;
             }

@@ -16,4 +16,9 @@
   <ItemGroup>
     <None Include="appsettings.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bll\AnaCSharp.Bll.Interfaces\AnaCSharp.Bll.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Bll\AnaCSharp.Bll\AnaCSharp.BLL.csproj" />
+  </ItemGroup>
 </Project>
