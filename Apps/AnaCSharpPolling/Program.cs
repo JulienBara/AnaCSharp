@@ -9,7 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var connection = @"toto"; // TODO: configure SQL
+
+// with local dev database creating using docker command
+// docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Your_password123" -p 1433:1433 mcr.microsoft.com/mssql/server
+var connection = @"Server=localhost,1433; Database = master; User = sa; Password = Your_password123"; // TODO: configure SQL
 
 Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
