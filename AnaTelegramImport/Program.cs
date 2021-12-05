@@ -24,7 +24,7 @@ namespace AnaTelegramImport
             var currentDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine($"Current Directory: {currentDirectory}");
 
-            var files = Directory.GetFiles($@"{currentDirectory}\Input");
+            var files = Directory.GetFiles(Path.Combine(currentDirectory, "Input"));
 
             // clean files: current telegram export format is not compliant with XDocument.Load
             foreach (var file in files)
@@ -70,7 +70,6 @@ namespace AnaTelegramImport
                     await anaService.LearnAsync(elem.Trim(), previousMessage);
                     previousMessage = elem.Trim();
                 }
-                
             }
         }
     }
