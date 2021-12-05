@@ -82,14 +82,14 @@ namespace AnaCSharpPolling
                     break;
                 // Compute message
                 default:
-                    if (! muted)
+                    if (!muted)
                     {
                         var answer = await _anaQueryService.GenerateAnswerAsync(messageText);
                         if (answer != "")
                             await botClient.SendTextMessageAsync(chatId, answer, cancellationToken: cancellationToken, replyToMessageId: messageId);
                     }
 
-                    if (update.Message.ReplyToMessage.Text != null)
+                    if (update.Message.ReplyToMessage?.Text != null)
                         await _anaCommandService.LearnAsync(messageText, update.Message.ReplyToMessage.Text);
                     break;
             }
