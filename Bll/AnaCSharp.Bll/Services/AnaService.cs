@@ -56,19 +56,19 @@ namespace AnaCSharp.BLL.Services
 
             var retMessage = "";
 
-            var lastWordsqueue = new Queue(lastWords.ToArray());
+            var lastWordsQueue = new Queue<string>(lastWords.ToArray());
 
             while (true)
             {
-                var determinedWords = await _determinedWordQueryRepository.FindDeterminedWordsAsync(lastWords);
+                var determinedWords = await _determinedWordQueryRepository.FindDeterminedWordsAsync(lastWordsQueue);
                 if (!determinedWords.Any())
                     break;
                 var bestweightedMessage = GetBestWeightedRandomMessage(determinedWords);
                 if (bestweightedMessage == "EOM")
                     break;
                 retMessage += " " + bestweightedMessage;
-                lastWordsqueue.Enqueue(bestweightedMessage);
-                lastWordsqueue.Dequeue();
+                lastWordsQueue.Enqueue(bestweightedMessage);
+                lastWordsQueue.Dequeue();
             }
 
             return retMessage;
