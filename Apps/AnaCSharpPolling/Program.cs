@@ -1,5 +1,6 @@
 ﻿using AnaCsharp.Dal.Interfaces.Repositories.Commands;
 using AnaCsharp.Dal.Interfaces.Repositories.Queries;
+using AnaCSharp.Bll.Interfaces.Services.Commands;
 using AnaCSharp.Bll.Interfaces.Services.Queries;
 using AnaCSharp.BLL.Services;
 using AnaCSharp.DAL;
@@ -25,6 +26,7 @@ Host.CreateDefaultBuilder(args)
 
             // services
             .AddTransient<IAnswerQueryService, AnaService>()
+            .AddTransient<ILearnCommandService, AnaService>()
 
             // repositories
             .AddTransient<IDeterminedWordCommandRepository, DeterminedWordRepository>()

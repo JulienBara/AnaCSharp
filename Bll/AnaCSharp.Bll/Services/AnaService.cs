@@ -29,18 +29,19 @@ namespace AnaCSharp.BLL.Services
             _determiningStateQueryRepository = determiningStateQueryRepository;
         }
 
-        public Task LearnAsync(string message, IEnumerable<string> lastWords)
+        public async Task LearnAsync(string message, string previousMessage)
         {
             message += " EOM";
+            previousMessage += " EOM";
+
             var words = message.Split();
-            var lastWordsqueue = new Queue(lastWords.ToArray());
+            var lastWordsQueue = new Queue<string>(previousMessage.Split().TakeLast(_markovDegree).ToList());
             foreach (var word in words)
             {
-                LearnAState(word, lastWords, _markovDegree);
-                lastWordsqueue.Enqueue(word);
-                lastWordsqueue.Dequeue();
+                await LearnAStateAsync(word, lastWordsQueue, _markovDegree);
+                lastWordsQueue.Enqueue(word);
+                lastWordsQueue.Dequeue();
             }
-            return Task.CompletedTask;
         }
 
         public async Task<string> GenerateAnswerAsync(string message)
@@ -73,7 +74,7 @@ namespace AnaCSharp.BLL.Services
             return retMessage;
         }
 
-        public async void LearnAState(string word, IEnumerable<string> lastWords, int markovDegree)
+        public async Task LearnAStateAsync(string word, IEnumerable<string> lastWords, int markovDegree)
         {
             if (lastWords.Count() == markovDegree)
             {

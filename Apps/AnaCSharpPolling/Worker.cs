@@ -1,4 +1,5 @@
-﻿using AnaCSharp.Bll.Interfaces.Services.Queries;
+﻿using AnaCSharp.Bll.Interfaces.Services.Commands;
+using AnaCSharp.Bll.Interfaces.Services.Queries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -19,17 +20,20 @@ namespace AnaCSharpPolling
         private readonly IConfiguration _configuration;
         private readonly ILogger<Worker> _logger;
         private readonly IAnswerQueryService _anaQueryService;
+        private readonly ILearnCommandService _anaCommandService;
         private bool muted = true;
 
         public Worker(
             IConfiguration configuration,
             ILogger<Worker> logger,
-            IAnswerQueryService anaQueryService
+            IAnswerQueryService anaQueryService,
+            ILearnCommandService anaCommandService
             )
         {
             _configuration = configuration;
             _logger = logger;
             _anaQueryService = anaQueryService;
+            _anaCommandService = anaCommandService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -78,11 +82,16 @@ namespace AnaCSharpPolling
                     break;
                 // Compute message
                 default:
+                    if (update.Message.ReplyToMessage.Text != null)
+                        _anaCommandService.LearnAsync(messageText, update.Message.ReplyToMessage.Text);
+
                     if (muted)
                         break;
+
                     var answer = await _anaQueryService.GenerateAnswerAsync(messageText);
                     if (answer == "")
                         break;
+
                     await botClient.SendTextMessageAsync(chatId, answer, cancellationToken: cancellationToken, replyToMessageId: messageId);
                     break;
             }

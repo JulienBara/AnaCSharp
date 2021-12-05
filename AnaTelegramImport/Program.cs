@@ -60,11 +60,12 @@ namespace AnaTelegramImport
                 var elemList = doc.XPathSelectElements($"//div[@class='text']").ToList();
                 var elemListDeHtmlised = elemList.Select(x => new HtmlString(x.Value).Value);
 
-                var lastWord = new List<string>();
+                var previousMessage = "";
 
                 foreach (var elem in elemListDeHtmlised)
                 {
-                    await anaService.LearnAsync(elem.Trim(), lastWord);
+                    await anaService.LearnAsync(elem.Trim(), previousMessage);
+                    previousMessage = elem.Trim();
                 }
                 
             }
