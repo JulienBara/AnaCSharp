@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using AnaCsharp.Dal.Interfaces.Repositories.Commands;
+using AnaCsharp.Dal.Interfaces.Repositories.Queries;
 using AnaCSharp.BLL.Services;
 using AnaCSharp.DAL;
 using AnaCSharp.DAL.Repositories;
@@ -25,30 +27,31 @@ namespace AnaTelegramImport
             var files = Directory.GetFiles($@"{currentDirectory}\Input");
 
             // clean files: current telegram export format is not compliant with XDocument.Load
-            //foreach (var file in files)
-            //{
-            //    Console.WriteLine($"Current File: {file}");
-            //    var lines = File.ReadAllLines(file);
-            //    lines = lines.Select(x => x.Replace("<br>", " ")).ToArray();
-            //    lines = lines.Select(x => x.Replace("<div class=\"page_body chat_page\">", " ")).ToArray();
-            //    lines = lines.Select(x => x.Replace("<div class=\"page_wrap\">", " ")).ToArray();
-            //    lines = lines.Take(lines.Length - 3).ToArray();
-            //    File.WriteAllLines(file, lines);
-            //}
+            foreach (var file in files)
+            {
+                Console.WriteLine($"Current File: {file}");
+                var lines = File.ReadAllLines(file);
+                lines = lines.Select(x => x.Replace("<br>", " ")).ToArray();
+                //lines = lines.Select(x => x.Replace("<div class=\"page_body chat_page\">", " ")).ToArray();
+                //lines = lines.Select(x => x.Replace("<div class=\"page_wrap\">", " ")).ToArray();
+                //lines = lines.Take(lines.Length - 3).ToArray();
+                File.WriteAllLines(file, lines);
+            }
 
             // import
             // prepare AnaService
             IUnityContainer container = new UnityContainer();
 
-            var connectionString = "Server=localhost,1434;Database=master;User=sa;Password=Your_password123";
+            var connectionString = "Server=localhost,1433;Database=ana;User=sa;Password=Your_password123";
             var contextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
             container.RegisterType<AnaContext>(new InjectionConstructor(contextOptions));
             var anaContext = container.Resolve<AnaContext>();
-            anaContext.Database.Migrate();
-
             container.RegisterType<AnaService>();
             container.RegisterType<DeterminedWordRepository>();
             container.RegisterType<DeterminingStateRepository>();
+            container.RegisterType<IDeterminedWordCommandRepository, DeterminedWordRepository>();
+            container.RegisterType<IDeterminedWordQueryRepository, DeterminedWordRepository>();
+            container.RegisterType<IDeterminingStateQueryRepository, DeterminingStateRepository>();
 
             var anaService = container.Resolve<AnaService>();
 
