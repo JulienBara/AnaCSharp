@@ -82,17 +82,15 @@ namespace AnaCSharpPolling
                     break;
                 // Compute message
                 default:
+                    if (! muted)
+                    {
+                        var answer = await _anaQueryService.GenerateAnswerAsync(messageText);
+                        if (answer != "")
+                            await botClient.SendTextMessageAsync(chatId, answer, cancellationToken: cancellationToken, replyToMessageId: messageId);
+                    }
+
                     if (update.Message.ReplyToMessage.Text != null)
-                        _anaCommandService.LearnAsync(messageText, update.Message.ReplyToMessage.Text);
-
-                    if (muted)
-                        break;
-
-                    var answer = await _anaQueryService.GenerateAnswerAsync(messageText);
-                    if (answer == "")
-                        break;
-
-                    await botClient.SendTextMessageAsync(chatId, answer, cancellationToken: cancellationToken, replyToMessageId: messageId);
+                        await _anaCommandService.LearnAsync(messageText, update.Message.ReplyToMessage.Text);
                     break;
             }
         }
