@@ -12,7 +12,8 @@ using Microsoft.Extensions.Hosting;
 
 // with local dev database creating using docker command
 // docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Your_password123" -p 1433:1433 mcr.microsoft.com/mssql/server
-var connection = @"Server=localhost,1433; Database = master; User = sa; Password = Your_password123"; // TODO: configure SQL
+// and run init.sql from Dal.SqlServer
+var connection = @"Server=localhost,1433; Database = ana; User = sa; Password = Your_password123"; // TODO: configure SQL
 
 Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>

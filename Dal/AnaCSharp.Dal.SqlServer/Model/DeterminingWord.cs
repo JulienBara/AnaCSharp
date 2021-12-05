@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AnaCSharp.DAL.Model
 {
+    [Table("DeterminingWords")]
     public class DeterminingWord
     {
         [Key]
