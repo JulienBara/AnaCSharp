@@ -11,7 +11,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sysobjects where name='Words')
 CREATE TABLE Words (
     WordId INT PRIMARY KEY IDENTITY(1,1),
-    Label NVARCHAR(64) NOT NULL
+    Label NVARCHAR(MAX) NOT NULL
 )
 GO
 
