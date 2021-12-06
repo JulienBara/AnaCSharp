@@ -32,6 +32,8 @@ namespace AnaTelegramImport
                 Console.WriteLine($"Current File: {file}");
                 var lines = File.ReadAllLines(file);
                 lines = lines.Select(x => x.Replace("<br>", " ")).ToArray();
+                lines = lines.Select(x => x.Replace("&laquo;", "")).ToArray();
+                lines = lines.Select(x => x.Replace("&raquo;", "")).ToArray();
                 //lines = lines.Select(x => x.Replace("<div class=\"page_body chat_page\">", " ")).ToArray();
                 //lines = lines.Select(x => x.Replace("<div class=\"page_wrap\">", " ")).ToArray();
                 //lines = lines.Take(lines.Length - 3).ToArray();
