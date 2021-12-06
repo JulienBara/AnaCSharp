@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B446B36-35AE-426B-94D5-09DFAC2A0876}"
-	ProjectSection(SolutionItems) = preProject
-		launch.sh = launch.sh
-		update.sh = update.sh
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dal", "Dal", "{B78D06B9-BDF1-4A9E-AAF1-CBC9073E27B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCsharp.Dal.Interfaces", "Dal\AnaCsharp.Dal.Interfaces\AnaCsharp.Dal.Interfaces.csproj", "{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}"
