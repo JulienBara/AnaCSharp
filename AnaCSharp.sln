@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		update.sh = update.sh
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramImport", "AnaTelegramImport\AnaTelegramImport.csproj", "{6154756B-7EED-47F8-86EC-BCEA3B401A98}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dal", "Dal", "{B78D06B9-BDF1-4A9E-AAF1-CBC9073E27B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCsharp.Dal.Interfaces", "Dal\AnaCsharp.Dal.Interfaces\AnaCsharp.Dal.Interfaces.csproj", "{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}"
@@ -27,16 +25,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{6C1C6993-1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharpPolling", "Apps\AnaCSharpPolling\AnaCSharpPolling.csproj", "{BB58AE69-11E3-421C-852C-D0EAB1C97C1C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramImport", "Apps\AnaTelegramImport\AnaTelegramImport.csproj", "{3FF9D6C8-DBB5-46E0-BBE8-848F66AB37C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFD06141-930F-4CC8-ABD4-4141EF7F9CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{BB58AE69-11E3-421C-852C-D0EAB1C97C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB58AE69-11E3-421C-852C-D0EAB1C97C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB58AE69-11E3-421C-852C-D0EAB1C97C1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF9D6C8-DBB5-46E0-BBE8-848F66AB37C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF9D6C8-DBB5-46E0-BBE8-848F66AB37C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF9D6C8-DBB5-46E0-BBE8-848F66AB37C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF9D6C8-DBB5-46E0-BBE8-848F66AB37C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +67,7 @@ Global
 		{62E04DDE-DB75-460B-A62B-07508EB7B7E1} = {6C23D051-BA89-4C41-A171-B549BB06C4C0}
 		{B1EE2C79-F704-4622-9895-3F8B5388C475} = {6C23D051-BA89-4C41-A171-B549BB06C4C0}
 		{BB58AE69-11E3-421C-852C-D0EAB1C97C1C} = {6C1C6993-17DA-44D3-9B37-22F336E435EF}
+		{3FF9D6C8-DBB5-46E0-BBE8-848F66AB37C3} = {6C1C6993-17DA-44D3-9B37-22F336E435EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FA09521-F8E8-4581-B738-9D9CBBB5E72B}
