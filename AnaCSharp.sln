@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaCSharp", "AnaCSharp\AnaCSharp.csproj", "{ECAB8916-E2F7-440F-8E96-7C416ACE0124}"
-EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B446B36-35AE-426B-94D5-09DFAC2A0876}"
 	ProjectSection(SolutionItems) = preProject
 		launch.sh = launch.sh
 		update.sh = update.sh
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramBotClient", "AnaTelegramBotClient\AnaTelegramBotClient.csproj", "{6526DA82-F15C-4032-88CD-504706CBCE40}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnaTelegramImport", "AnaTelegramImport\AnaTelegramImport.csproj", "{6154756B-7EED-47F8-86EC-BCEA3B401A98}"
 EndProject
@@ -39,18 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ECAB8916-E2F7-440F-8E96-7C416ACE0124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECAB8916-E2F7-440F-8E96-7C416ACE0124}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECAB8916-E2F7-440F-8E96-7C416ACE0124}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECAB8916-E2F7-440F-8E96-7C416ACE0124}.Release|Any CPU.Build.0 = Release|Any CPU
-		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{386A6E41-79CF-4E22-9E22-3EAE92D83FB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6526DA82-F15C-4032-88CD-504706CBCE40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6526DA82-F15C-4032-88CD-504706CBCE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6526DA82-F15C-4032-88CD-504706CBCE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6526DA82-F15C-4032-88CD-504706CBCE40}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6154756B-7EED-47F8-86EC-BCEA3B401A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
