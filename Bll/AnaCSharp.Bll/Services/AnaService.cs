@@ -49,7 +49,7 @@ namespace AnaCSharp.BLL.Services
             message += " EOM";
             var words = message.Split(' ');
 
-            if (words.Length <= _markovDegree)
+            if (words.Length < _markovDegree)
                 return "";
 
             var lastWords = words.Skip(words.Length - _markovDegree).ToList();
