@@ -1,4 +1,6 @@
-﻿namespace AnaCSharp.DAL.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AnaCSharp.DAL.Model
 {
     public class Word
     {
