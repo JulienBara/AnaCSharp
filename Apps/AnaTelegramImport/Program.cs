@@ -26,21 +26,6 @@ namespace AnaTelegramImport
 
             var files = Directory.GetFiles(Path.Combine(currentDirectory, "Input"));
 
-            // clean files: current telegram export format is not compliant with XDocument.Load
-            foreach (var file in files)
-            {
-                Console.WriteLine($"Current File: {file}");
-                var lines = File.ReadAllLines(file);
-                lines = lines.Select(x => x.Replace("<br>", " ")).ToArray();
-                lines = lines.Select(x => x.Replace("&laquo;", "")).ToArray();
-                lines = lines.Select(x => x.Replace("&raquo;", "")).ToArray();
-                //lines = lines.Select(x => x.Replace("<div class=\"page_body chat_page\">", " ")).ToArray();
-                //lines = lines.Select(x => x.Replace("<div class=\"page_wrap\">", " ")).ToArray();
-                //lines = lines.Take(lines.Length - 3).ToArray();
-                File.WriteAllLines(file, lines);
-            }
-
-            // import
             // prepare AnaService
             IUnityContainer container = new UnityContainer();
 
@@ -57,9 +42,24 @@ namespace AnaTelegramImport
 
             var anaService = container.Resolve<AnaService>();
 
+
             foreach (var file in files)
             {
                 Console.WriteLine($"Current File: {file}");
+
+                // clean files: current telegram export format is not compliant with XDocument.Load
+                Console.WriteLine($"\tclean");
+                var lines = File.ReadAllLines(file);
+                lines = lines.Select(x => x.Replace("<br>", " ")).ToArray();
+                lines = lines.Select(x => x.Replace("&laquo;", "")).ToArray();
+                lines = lines.Select(x => x.Replace("&raquo;", "")).ToArray();
+                //lines = lines.Select(x => x.Replace("<div class=\"page_body chat_page\">", " ")).ToArray();
+                //lines = lines.Select(x => x.Replace("<div class=\"page_wrap\">", " ")).ToArray();
+                //lines = lines.Take(lines.Length - 3).ToArray();
+                File.WriteAllLines(file, lines);
+
+                // import
+                Console.WriteLine($"\timport");
                 XDocument doc = XDocument.Load(file);
 
                 var elemList = doc.XPathSelectElements($"//div[@class='text']").ToList();
@@ -72,6 +72,10 @@ namespace AnaTelegramImport
                     await anaService.LearnAsync(elem.Trim(), previousMessage);
                     previousMessage = elem.Trim();
                 }
+
+                // delete imported file
+                Console.WriteLine($"\tdelet");
+                File.Delete(file);
             }
         }
     }
