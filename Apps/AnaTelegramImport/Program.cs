@@ -12,8 +12,7 @@ using AnaCSharp.DAL;
 using AnaCSharp.DAL.Repositories;
 using Microsoft.AspNetCore.Html;
 using Microsoft.EntityFrameworkCore;
-using Unity;
-using Unity.Injection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AnaTelegramImport
 {
@@ -27,21 +26,25 @@ namespace AnaTelegramImport
             var files = Directory.GetFiles(Path.Combine(currentDirectory, "Input"));
 
             // prepare AnaService
-            IUnityContainer container = new UnityContainer();
+            var connection = @"Server=localhost,1433; Database = ana; User = sa; Password = Your_password123";
 
-            var connectionString = "Server=localhost,1433;Database=ana;User=sa;Password=Your_password123";
-            var contextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
-            container.RegisterType<AnaContext>(new InjectionConstructor(contextOptions));
-            var anaContext = container.Resolve<AnaContext>();
-            container.RegisterType<AnaService>();
-            container.RegisterType<DeterminedWordRepository>();
-            container.RegisterType<DeterminingStateRepository>();
-            container.RegisterType<IDeterminedWordCommandRepository, DeterminedWordRepository>();
-            container.RegisterType<IDeterminedWordQueryRepository, DeterminedWordRepository>();
-            container.RegisterType<IDeterminingStateQueryRepository, DeterminingStateRepository>();
+            var services = new ServiceCollection();
+            services
+                .AddDbContext<AnaContext>(
+                    options => options.UseSqlServer(connection), ServiceLifetime.Transient, ServiceLifetime.Transient)
 
-            var anaService = container.Resolve<AnaService>();
+                // services
+                .AddTransient<AnaService>()
 
+                // repositories
+                .AddTransient<IDeterminedWordCommandRepository, DeterminedWordRepository>()
+                .AddTransient<IDeterminedWordQueryRepository, DeterminedWordRepository>()
+                .AddTransient<IDeterminingStateQueryRepository, DeterminingStateRepository>()
+                .AddTransient<DeterminingStateRepository>()
+                .AddTransient<WordRepository>()
+                ;
+
+            var serviceProvider = services.BuildServiceProvider();
 
             foreach (var file in files)
             {
@@ -67,14 +70,28 @@ namespace AnaTelegramImport
 
                 var previousMessage = "";
 
+                var tasks = new List<Task>();
+                var inc = 0;
+                var total = elemListDeHtmlised.Count();
+                Console.Write("\t{0}% - {1}/{2}    ", inc / total, inc, total);
                 foreach (var elem in elemListDeHtmlised)
                 {
-                    await anaService.LearnAsync(elem.Trim(), previousMessage);
+                    var anaService = serviceProvider.GetService<AnaService>();
+                    var task = (Func<Task>)(async () =>
+                    {
+                        await anaService.LearnAsync(elem.Trim(), previousMessage);
+                        inc++;
+                        Console.Write("\r\t{0}% - {1}/{2}    ", 100 * inc / total, inc, total);
+                    });
+                    tasks.Add(task());
                     previousMessage = elem.Trim();
                 }
 
+                Task.WaitAll(tasks.ToArray());
+                Console.WriteLine("\r\tDone             ");
+
                 // delete imported file
-                Console.WriteLine($"\tdelet");
+                Console.WriteLine($"\tdelete");
                 File.Delete(file);
             }
         }
