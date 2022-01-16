@@ -18,7 +18,7 @@ namespace AnaTelegramImport
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine($"Current Directory: {currentDirectory}");
