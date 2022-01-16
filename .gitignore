@@ -264,7 +264,7 @@ __pycache__/
 /AnaTelegramBotClient/ana.db
 
 # Input
-/AnaTelegramImport/Input/
+/Apps/AnaTelegramImport/Input/
 
 # Settings
 /Apps/AnaCSharpPolling/appsettings.json
