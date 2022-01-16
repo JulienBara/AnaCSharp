@@ -11,8 +11,10 @@ GO
 IF NOT EXISTS (SELECT * FROM sysobjects where name='Words')
 CREATE TABLE Words (
     WordId INT PRIMARY KEY IDENTITY(1,1),
-    Label NVARCHAR(MAX) NOT NULL
+    Label NVARCHAR(450) NOT NULL
 )
+GO
+CREATE INDEX Words_Label ON Words (Label)
 GO
 
 IF NOT EXISTS (SELECT * FROM sysobjects where name='DeterminingStates')
