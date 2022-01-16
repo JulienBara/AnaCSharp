@@ -17,7 +17,7 @@ namespace AnaCSharp.BLL.Services
         private readonly IDeterminedWordQueryRepository _determinedWordQueryRepository;
         private readonly IDeterminingStateQueryRepository _determiningStateQueryRepository;
 
-        private int _markovDegree = 2;
+        private int _markovDegree = 3;
 
         public AnaService(
             IDeterminedWordCommandRepository determinedWordCommandRepository,
