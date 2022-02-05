@@ -22,7 +22,6 @@ Create an `appsettings.json` file at the location `/AnaCSharp/Apps/AnaCSharpPoll
 }
 ``` 
 
-
 ### Setting up the database
 
 First start a docker container with SQL Server.
