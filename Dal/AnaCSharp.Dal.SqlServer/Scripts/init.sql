@@ -19,21 +19,16 @@ GO
 
 IF NOT EXISTS (SELECT * FROM sysobjects where name='DeterminingStates')
 CREATE TABLE DeterminingStates (
-    DeterminingStateId INT PRIMARY KEY IDENTITY(1,1)
+    DeterminingStateId INT PRIMARY KEY IDENTITY(1,1),
+    Word0Id INT NOT NULL,
+    Word1Id INT NOT NULL,
+    Word2Id INT NOT NULL,
+    FOREIGN KEY (Word0Id) REFERENCES dbo.Words (WordId),
+    FOREIGN KEY (Word1Id) REFERENCES dbo.Words (WordId),
+    FOREIGN KEY (Word2Id) REFERENCES dbo.Words (WordId),
 )
 GO
-
-IF NOT EXISTS (SELECT * FROM sysobjects where name='DeterminingWords')
-CREATE TABLE DeterminingWords (
-    DeterminingWordId INT PRIMARY KEY IDENTITY(1,1),
-    WordId INT NOT NULL,
-    DeterminingStateId INT NOT NULL,
-    [Order] INT NOT NULL,
-    FOREIGN KEY (WordId) REFERENCES dbo.Words (WordId),
-    FOREIGN KEY (DeterminingStateId) REFERENCES dbo.DeterminingStates (DeterminingStateId)
-)
-GO
-CREATE INDEX DeterminingWords_WordId_Order ON DeterminingWords (WordId, [Order])
+CREATE INDEX DeterminingStates_Word0Id_Word1Id_Word2Id ON DeterminingStates (Word0Id, Word1Id, Word2Id)
 GO
 
 IF NOT EXISTS (SELECT * FROM sysobjects where name='DeterminedWords')

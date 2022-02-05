@@ -28,43 +28,23 @@ namespace AnaCSharp.DAL.Repositories
 
         public async Task<int> GetDeterminingStateByLastWordAsync(IEnumerable<string> lastWords)
         {
-            // get markov degree
-            var n = lastWords.Count();
 
-            // forge query
-            var query = _anaContext
+            var determiningState = _anaContext
                 .DeterminingStates
-                .AsQueryable();
-
-            for (var i = 0; i < n; i++)
-            {
-                var word = lastWords.ToArray()[i];
-                var order = n - i - 1;
-                query = query.Intersect(_anaContext
-                    .DeterminingStates
-                    .Where(x => x.DeterminingWords
-                        .Any(y => y.Word.Label == word
-                                && y.Order == order)));
-            }
-            var determiningState = query.FirstOrDefault();
+                .FirstOrDefault(x =>
+                    x.Word0.Label == lastWords.ElementAt(0)
+                    && x.Word1.Label == lastWords.ElementAt(1)
+                    && x.Word2.Label == lastWords.ElementAt(2)
+                );
 
             // if doesn't exist add
             if (determiningState == null)
             {
-                var determiningWords = new List<DeterminingWord>();
-                for (var i = 0; i < n; i++)
-                {
-                    var newDeterminingWord = new DeterminingWord
-                    {
-                        WordId = await _wordRepository.GetWordIdByLabelAsync(lastWords.ToArray()[i]),
-                        Order = n - i - 1
-                    };
-                    determiningWords.Add(newDeterminingWord);
-                }
-
                 var newDeterminingState = new DeterminingState
                 {
-                    DeterminingWords = determiningWords
+                    Word0Id = await _wordRepository.GetWordIdByLabelAsync(lastWords.ElementAt(0)),
+                    Word1Id = await _wordRepository.GetWordIdByLabelAsync(lastWords.ElementAt(1)),
+                    Word2Id = await _wordRepository.GetWordIdByLabelAsync(lastWords.ElementAt(2)),
                 };
                 _anaContext.DeterminingStates.Add(newDeterminingState);
 
