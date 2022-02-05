@@ -57,12 +57,9 @@ namespace AnaCSharp.DAL.Repositories
         {
             var determiningStateId = await _determiningStateRepository.GetDeterminingStateByLastWordAsync(lastWords);
 
-            var determiningState = await _anaContext.DeterminingStates
-                .Include(x => x.DeterminedWords)
-                    .ThenInclude(x => x.Word)
-                .FirstOrDefaultAsync(x => x.DeterminingStateId == determiningStateId);
-
-            return determiningState.DeterminedWords
+            return _anaContext.DeterminedWords
+                .Where(x => x.DeterminingStateId == determiningStateId)
+                .Include(x => x.Word)
                 .Select(x => new DeterminedWord
                 {
                     Number = x.Number,

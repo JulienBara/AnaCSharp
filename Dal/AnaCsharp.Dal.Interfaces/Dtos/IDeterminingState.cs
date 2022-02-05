@@ -7,7 +7,5 @@ namespace AnaCsharp.Dal.Interfaces.Dtos
         int DeterminingStateId { get; set; }
 
         ICollection<IDeterminedWord> DeterminedWords { get; set; }
-
-        ICollection<IDeterminingWord> DeterminingWords { get; set; }
     }
 }
